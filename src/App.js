@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import StartPage from "./components/StartPage";
+import QuizPage from "./components/QuizPage";
+import useStart from "./hooks/useStart";
+import useFetch from "./hooks/useFetch";
+import "./styles/app.css";
 
-function App() {
+export default function App() {
+  const [gameStart, setGameStart] = useStart(false);
+  const baseUrl = "https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple";
+  const questions = useFetch(baseUrl);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="main-container">
+      {gameStart ? (
+        <QuizPage questions={questions} />
+      ) : (
+        <StartPage startGameHandler={setGameStart} />
+      )}
+    </main>
   );
 }
-
-export default App;

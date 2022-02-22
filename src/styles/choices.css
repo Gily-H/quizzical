@@ -1,0 +1,29 @@
+.answer-choice {
+  display: none;
+}
+
+.answer-choice:checked + label {
+  background-color: rgb(0, 66, 128);
+  color: white;
+}
+
+.answer-label {
+  background-color: rgb(240, 240, 240);
+  display: inline-block;
+  margin-right: 1rem;
+  padding: 0.3rem 1rem;
+  min-width: 120px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.highlight {
+  background-color: red;
+}
+
+.highlight-correct {
+  background-color: green;
+}
