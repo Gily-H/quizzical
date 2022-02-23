@@ -20,10 +20,10 @@
   cursor: pointer;
 }
 
-.highlight {
-  background-color: red;
+.highlight-incorrect {
+  background-color: rgb(255, 164, 164);
 }
 
 .highlight-correct {
-  background-color: green;
+  background-color: rgb(89, 211, 89);
 }

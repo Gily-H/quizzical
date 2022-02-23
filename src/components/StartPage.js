@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/startpage.css";
 
-export default function StartPage({ startGameHandler }) {
+const StartPage = ({ startGameHandler }) => {
   return (
     <div className="start-page">
       <h1 className="start-header">Quizzical</h1>
@@ -12,3 +12,5 @@ export default function StartPage({ startGameHandler }) {
     </div>
   );
 }
+
+export default StartPage

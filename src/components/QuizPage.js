@@ -3,16 +3,40 @@ import Question from "./Question";
 import { nanoid } from "nanoid";
 import "../styles/quizpage.css";
 
-export default function QuizPage({ questions }) {
+const QuizPage = ({ questions }) => {
   const [showResults, setShowResults] = useState(false);
+  const [selected, setSelected] = useState(() => {
+    const selectedAnswers = {};
+    for (let i = 0; i < 5; i++) {
+      selectedAnswers[`question${i}`] = "";
+    }
+    return selectedAnswers;
+  });
 
-  function showResultsOnClick() {
+  const showResultsOnClick = () => {
     setShowResults((prevShowResults) => !prevShowResults);
-  }
+  };
 
-  const quizLayout = questions.results.map((question) => (
-    <Question key={nanoid()} showResults={showResults} questionInfo={question} />
-  ));
+  const selectAnswer = (event) => {
+    setSelected((prevSelected) => ({
+      ...selected,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const quizLayout = questions.results.map((question, idx) => {
+    const questionId = `question${idx}`;
+    return (
+      <Question
+        key={nanoid()}
+        showResults={showResults}
+        selectOnClick={selectAnswer}
+        question={question}
+        questionId={questionId}
+        selectedAnswer={selected[questionId]}
+      />
+    );
+  });
 
   return (
     <div className="quiz-container">
@@ -22,4 +46,6 @@ export default function QuizPage({ questions }) {
       </button>
     </div>
   );
-}
+};
+
+export default QuizPage;
