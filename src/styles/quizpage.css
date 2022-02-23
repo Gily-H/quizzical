@@ -20,7 +20,7 @@ hr {
   border: 1px solid rgba(167, 167, 167, 0.219);
 }
 
-.check-answers {
+.check-answers-btn {
   background-color: rgb(0, 140, 255);
   color: white;
   align-self: center;
@@ -29,7 +29,7 @@ hr {
   font-size: 1.2rem;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 1px 1px 1px 1px rgb(223, 223, 223);
   cursor: pointer;
 }
@@ -37,11 +37,10 @@ hr {
 .score-container {
   text-align: right;
   margin-top: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .score-text {
   margin-right: 1rem;
   font-weight: bold;
-  letter-spacing: 1px;
 }

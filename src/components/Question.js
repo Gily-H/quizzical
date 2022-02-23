@@ -1,21 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { nanoid } from "nanoid";
-import "../styles/choices.css";
+import "../styles/Question.css";
 
-const Question = ({ showResults, selectOnClick, question, questionId, selectedAnswer }) => {
-  const incorrectChoices = question.incorrect_answers;
-  const corrAnswer = question.correct_answer;
-
-  console.log("render");
-  const answers = [...incorrectChoices, corrAnswer];
-
-  const choices = answers.map((answer) => {
+const Question = ({ showResults, questionInfo }) => {
+  const choices = questionInfo.answers.map((answer) => {
     const id = nanoid();
     let labelName = "answer-label";
     if (showResults) {
-      if (corrAnswer === answer) {
+      if (questionInfo.correctAnswer === answer) {
         labelName += " highlight-correct";
-      } else if (selectedAnswer === answer) {
+      } else if (questionInfo.selectedAnswer === answer) {
         labelName += " highlight-incorrect";
       }
     }
@@ -25,10 +19,10 @@ const Question = ({ showResults, selectOnClick, question, questionId, selectedAn
         <input
           className="answer-choice"
           type="radio"
-          checked={selectedAnswer === answer}
-          name={questionId}
+          checked={questionInfo.selectedAnswer === answer}
+          name={questionInfo.id}
           value={answer}
-          onChange={selectOnClick}
+          onChange={questionInfo.selectOnClick}
           id={id}
         />
         <label className={labelName} htmlFor={id}>
@@ -40,7 +34,7 @@ const Question = ({ showResults, selectOnClick, question, questionId, selectedAn
 
   return (
     <>
-      <h2>{question.question}</h2>
+      <h2>{questionInfo.question}</h2>
       {choices}
     </>
   );

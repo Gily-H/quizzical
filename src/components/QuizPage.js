@@ -2,11 +2,28 @@ import React, { useState } from "react";
 import Question from "./Question";
 import Score from "./Score";
 import { nanoid } from "nanoid";
-import "../styles/quizpage.css";
+import "../styles/QuizPage.css";
 
-const QuizPage = ({ questions, startGameHandler }) => {
-  const [showResults, setShowResults] = useState(false);
+const QuizPage = ({
+  questions,
+  startGameHandler,
+  showResults,
+  showResultsHandler,
+  hideResultsHandler,
+  questionsHandler,
+}) => {
   const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState(() => {
+    const answers = [];
+    questions.forEach((question) => {
+      const questionAnswers = [...question.incorrect_answers];
+      const randomIdx = Math.floor(Math.random() * answers.length);
+      questionAnswers.splice(randomIdx, 0, question.correct_answer);
+      answers.push(questionAnswers);
+    });
+    return answers;
+  });
+
   const [selected, setSelected] = useState(() => {
     const selectedAnswers = {};
     for (let i = 0; i < 5; i++) {
@@ -23,13 +40,13 @@ const QuizPage = ({ questions, startGameHandler }) => {
   };
 
   const showResultsOnClick = () => {
-    setShowResults((prevShowResults) => !prevShowResults);
+    showResultsHandler();
     updateScore();
   };
 
   const updateScore = () => {
     let score = 0;
-    questions.results.map((question, idx) => {
+    questions.forEach((question, idx) => {
       if (question.correct_answer === selected[`question${idx}`]) {
         score++;
       }
@@ -38,18 +55,17 @@ const QuizPage = ({ questions, startGameHandler }) => {
     setScore(score);
   };
 
-  const quizLayout = questions.results.map((question, idx) => {
+  const quizLayout = questions.map((question, idx) => {
     const questionId = `question${idx}`;
-    return (
-      <Question
-        key={nanoid()}
-        showResults={showResults}
-        selectOnClick={selectAnswer}
-        question={question}
-        questionId={questionId}
-        selectedAnswer={selected[questionId]}
-      />
-    );
+    const questionInfo = {
+      id: questionId,
+      question: question.question,
+      answers: answers[idx],
+      correctAnswer: question.correct_answer,
+      selectedAnswer: selected[questionId],
+      selectOnClick: selectAnswer,
+    };
+    return <Question key={nanoid()} showResults={showResults} questionInfo={questionInfo} />;
   });
 
   return (
@@ -57,9 +73,15 @@ const QuizPage = ({ questions, startGameHandler }) => {
       {quizLayout}
       <hr />
       {showResults ? (
-        <Score score={score} playHandler={startGameHandler} />
+        <Score
+          score={score}
+          questionCount={questions.length}
+          playHandler={startGameHandler}
+          hideResults={hideResultsHandler}
+          questionsHandler={questionsHandler}
+        />
       ) : (
-        <button className="check-answers" onClick={showResultsOnClick}>
+        <button className="check-answers-btn" onClick={showResultsOnClick}>
           Check Answers
         </button>
       )}
