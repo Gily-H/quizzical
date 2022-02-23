@@ -25,11 +25,23 @@ hr {
   color: white;
   align-self: center;
   margin: 1rem 0;
-  padding: 0.8rem 1.3rem;
-  font-size: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
   font-weight: bold;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 1px 1px 1px 1px rgb(223, 223, 223);
   cursor: pointer;
+}
+
+.score-container {
+  text-align: right;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+.score-text {
+  margin-right: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
 }

@@ -6,11 +6,11 @@ const StartPage = ({ startGameHandler }) => {
     <div className="start-page">
       <h1 className="start-header">Quizzical</h1>
       <p className="start-description">description</p>
-      <button className="start-btn" onClick={startGameHandler}>
+      <button className="play-btn" onClick={startGameHandler}>
         Start Quiz!
       </button>
     </div>
   );
-}
+};
 
-export default StartPage
+export default StartPage;

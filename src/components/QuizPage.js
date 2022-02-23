@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Question from "./Question";
+import Score from "./Score";
 import { nanoid } from "nanoid";
 import "../styles/quizpage.css";
 
-const QuizPage = ({ questions }) => {
+const QuizPage = ({ questions, startGameHandler }) => {
   const [showResults, setShowResults] = useState(false);
+  const [score, setScore] = useState(0);
   const [selected, setSelected] = useState(() => {
     const selectedAnswers = {};
     for (let i = 0; i < 5; i++) {
@@ -13,15 +15,27 @@ const QuizPage = ({ questions }) => {
     return selectedAnswers;
   });
 
-  const showResultsOnClick = () => {
-    setShowResults((prevShowResults) => !prevShowResults);
-  };
-
   const selectAnswer = (event) => {
     setSelected((prevSelected) => ({
-      ...selected,
+      ...prevSelected,
       [event.target.name]: event.target.value,
     }));
+  };
+
+  const showResultsOnClick = () => {
+    setShowResults((prevShowResults) => !prevShowResults);
+    updateScore();
+  };
+
+  const updateScore = () => {
+    let score = 0;
+    questions.results.map((question, idx) => {
+      if (question.correct_answer === selected[`question${idx}`]) {
+        score++;
+      }
+    });
+
+    setScore(score);
   };
 
   const quizLayout = questions.results.map((question, idx) => {
@@ -41,9 +55,14 @@ const QuizPage = ({ questions }) => {
   return (
     <div className="quiz-container">
       {quizLayout}
-      <button className="check-answers" onClick={showResultsOnClick}>
-        Check Answers
-      </button>
+      <hr />
+      {showResults ? (
+        <Score score={score} playHandler={startGameHandler} />
+      ) : (
+        <button className="check-answers" onClick={showResultsOnClick}>
+          Check Answers
+        </button>
+      )}
     </div>
   );
 };

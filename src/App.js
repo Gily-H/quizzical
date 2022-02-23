@@ -10,18 +10,18 @@ const App = () => {
   const questions = useFetch(baseUrl);
 
   const startHandler = () => {
-    setGameStart(prevGameStart => true)
-  }
+    setGameStart((prevGameStart) => !prevGameStart);
+  };
 
   return (
     <main className="main-container">
       {gameStart ? (
-        <QuizPage questions={questions} />
+        <QuizPage questions={questions} startGameHandler={startHandler} />
       ) : (
         <StartPage startGameHandler={startHandler} />
       )}
     </main>
   );
-}
+};
 
-export default App
+export default App;

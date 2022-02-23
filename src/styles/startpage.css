@@ -10,11 +10,11 @@
   font-size: 1.3rem;
 }
 
-.start-btn {
+.play-btn {
   background-color: rgb(0, 140, 255);
   color: white;
   padding: 1rem 2rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   border: none;
   border-radius: 8px;
