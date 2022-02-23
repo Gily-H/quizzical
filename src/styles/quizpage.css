@@ -1,18 +1,10 @@
 .quiz-container {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 700px;
+  width: 80%;
+  max-width: 1000px;
 }
 
-.question-container {
-  padding-left: 1rem;
-}
-
-.question {
-  margin: 1.5rem 0rem;
-  font-size: 1.2rem;
-  font-weight: bold;
+.results-container {
+  text-align: center;
 }
 
 hr {
@@ -36,7 +28,6 @@ hr {
 
 .score-container {
   text-align: right;
-  margin-top: 1rem;
   font-size: 1.4rem;
 }
 

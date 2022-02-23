@@ -71,20 +71,21 @@ const QuizPage = ({
   return (
     <div className="quiz-container">
       {quizLayout}
-      <hr />
-      {showResults ? (
-        <Score
-          score={score}
-          questionCount={questions.length}
-          playHandler={startGameHandler}
-          hideResults={hideResultsHandler}
-          questionsHandler={questionsHandler}
-        />
-      ) : (
-        <button className="check-answers-btn" onClick={showResultsOnClick}>
-          Check Answers
-        </button>
-      )}
+      <div className="results-container">
+        {showResults ? (
+          <Score
+            score={score}
+            questionCount={questions.length}
+            playHandler={startGameHandler}
+            hideResults={hideResultsHandler}
+            questionsHandler={questionsHandler}
+          />
+        ) : (
+          <button className="check-answers-btn" onClick={showResultsOnClick}>
+            Check Answers
+          </button>
+        )}
+      </div>
     </div>
   );
 };

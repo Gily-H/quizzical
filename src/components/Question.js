@@ -1,5 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
+import { sanitize } from "../utils/stringSanitizer";
 import "../styles/Question.css";
 
 const Question = ({ showResults, questionInfo }) => {
@@ -26,17 +27,18 @@ const Question = ({ showResults, questionInfo }) => {
           id={id}
         />
         <label className={labelName} htmlFor={id}>
-          {answer}
+          {sanitize(answer)}
         </label>
       </div>
     );
   });
 
   return (
-    <>
-      <h2>{questionInfo.question}</h2>
-      {choices}
-    </>
+    <div className="question-container">
+      <h2 className="question-text">{sanitize(questionInfo.question)}</h2>
+      <div className="answer-choices-container">{choices}</div> 
+      <hr/>
+    </div>
   );
 };
 
